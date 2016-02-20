@@ -28,6 +28,9 @@ Install `embark-framework` globally
 npm install -g grunt
 # isntall embark
 npm install -g embark-framework
+# npm install
+cd examples/embark
+npm install
 ```
 
 ## Usage
@@ -35,14 +38,12 @@ npm install -g embark-framework
 First start a blockchain process
 
 ```bash
-cd examples/embark
 embark blockchain
 ```
 
 In a new terminal window, start up the server.
 
 ```bash
-cd examples/embark
 embark run
 ```
 

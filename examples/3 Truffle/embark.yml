@@ -1,4 +1,0 @@
-type: "manual" #other options: meteor, grunt
-contracts: [] # contracts files
-blockchainConfig: "embark-config/blockchain.yml" # blockchain config
-contractsConfig: "embark-config/contracts.yml" # contracts config

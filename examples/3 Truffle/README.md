@@ -1,24 +1,24 @@
-# Truffle Embark Imba
+# Truffle Example
 
 ### A quest to find the perfect dapp development environment
 
 ## Install
 
 * Truffle `npm install -g truffle`
-* Embark `npm install -g embark-framework`
 * Imba `npm install -g imba`
 
 ## Usage
 
+Spin up a testnet with `embark` on port `8545`, then start watching with `truffle`
+
 ```bash
-git clone https://github.com/hitchcott/truffle-embark-imba
-cd truffle-embark-imba
-embark blockchain
-# in a seperate terminal
+truffle deploy
 truffle build
 truffle watch
 ```
 
-## TODO
+Run the tests
 
-Implement dapple/dappsys
+```
+truffle test
+```

@@ -3,6 +3,8 @@ What Why How
 
 Get dapple working
 
+Add instructions for test runner
+
 Collect info:
   createdAt: Date
   updatedAt: Date (last major release)
