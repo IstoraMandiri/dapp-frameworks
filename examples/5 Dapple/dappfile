@@ -1,5 +1,6 @@
+name: DappleTest
 layout:
-  sol_sources: src/sol
-  build_dir: tmp/dappleBuild/
+  sol_sources: contracts/sol
+  build_dir: build/
 dependencies:
-  dappsys: NexusDevelopment/dappsys
+  dappsys: 'https://github.com/nexusdev/dappsys.git@bc2e792'
