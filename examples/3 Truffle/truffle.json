@@ -1,0 +1,23 @@
+{
+  "build": {
+    "index.html": "index.html",
+    "app.js": [
+      "javascripts/imba.js",
+      "imba/imba.imba"
+    ],
+    "app.css": [
+      "stylesheets/app.scss"
+    ],
+    "images/": "images/"
+  },
+  "deploy": [
+    "MetaCoin"
+  ],
+  "rpc": {
+    "host": "localhost",
+    "port": 8101
+  },
+  "processors": {
+    ".imba": "lib/process-imba.js"
+  }
+}

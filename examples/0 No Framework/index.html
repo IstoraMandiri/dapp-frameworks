@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>My 1st Dapp</title>
+    <script src="jquery-2.1.4.min.js"></script>
+    <script src="web3.min.js"></script>
+    <script>
+
+      web3.setProvider(new web3.providers.HttpProvider('http://geth.node:8545'));
+
+      $(document).ready(function(){
+        var transactionHash;
+        var simpleStorageContractInstance;
+
+        var soliditySource = " \
+        contract SimpleStorage { \
+          uint public storedData; \
+          function SimpleStorage(uint initialValue) { \
+            storedData = initialValue; \
+          } \
+          function set(uint x) { \
+            storedData = x; \
+          } \
+          function get() constant returns (uint retVal) { \
+            return storedData; \
+          } \
+        }"
+        var contractABI;
+        var compiledSource;
+        var code;
+        var simpleStorageContract;
+        web3.eth.compile.solidity(soliditySource, function (err ,result) {
+          if(err){
+            alert(err);
+          };
+          compiledSource = result;
+          contractABI = result.SimpleStorage.info.abiDefinition;
+          code = compiledSource.SimpleStorage.code;
+          simpleStorageContract = web3.eth.contract(contractABI);
+        })
+
+        $('.set-value').click(function(){
+          var newValue = prompt("Enter a value")
+            if(simpleStorageContractInstance) {
+              simpleStorageContractInstance.set.sendTransaction(newValue, {from: web3.eth.coinbase});
+            }
+          console.log("Setting value...", newValue);
+        });
+
+        $('.get-value').click(function(){
+          var gottenValue = 'unknown';
+          if(simpleStorageContractInstance) {
+            gottenValue = simpleStorageContractInstance.get();
+          }
+          $('.the-value').text(gottenValue);
+        });
+
+        $('#create-contract').click(function () {
+          console.log('creating')
+          simpleStorageContractInstance = simpleStorageContract.new(1, {data: code, from: web3.eth.coinbase, gas: 300000}, function (err, contract) {
+            if(!err) {
+              if(!contract.address) {
+                console.log('tx pending...', contract.transactionHash);
+              } else {
+                console.log(contract.address);
+                $('#contractString').text(contract.address);
+              }
+            } else {
+              alert(err);
+            }
+          });
+        });
+
+        setInterval(function(){
+          $('#mining').text(web3.eth.mining);
+          $('#coinbase').text(web3.eth.coinbase);
+          $('#balance').text(web3.fromWei(web3.eth.getBalance(web3.eth.coinbase),"ether"));
+          var blockInfo = web3.eth.getBlock("latest");
+          $('#latestBlock').text(blockInfo.number);
+          $('#latestBlockTimestamp').text(new Date(blockInfo.timestamp*1000).toLocaleString());
+          $('#latestBlockHash').text(blockInfo.hash);
+        }, 2000);
+
+      });
+    </script>
+  </head>
+  <body>
+
+    <p>
+      The value is: <span class='the-value'>?</span>
+    </p>
+    <p>
+      <button class='get-value'>Get</button>
+      <button class='set-value'>Set</button>
+      <button id='create-contract'>Create Contract</button>
+    </p>
+
+    <hr>
+
+    <table>
+      <tr>
+        <td>Mining</td>
+        <td id="mining"></td>
+      </tr>
+      <tr>
+        <td>Coinbase Address</td>
+        <td id="coinbase"></td>
+      </tr>
+      <tr>
+        <td>Balance</td>
+        <td id="balance"></td>
+      </tr>
+      <tr>
+        <td>Latest Block Number</td>
+        <td id="latestBlock"></td>
+      </tr>
+      <tr>
+        <td>Latest Block Timestamp</td>
+        <td id="latestBlockTimestamp"></td>
+      </tr>
+      <tr>
+        <td>Latest Block Hash</td>
+        <td id="latestBlockHash"></td>
+      </tr>
+      <tr>
+        <td>Contract String</td>
+        <td id="contractString"></td>
+      </tr>
+    </table>
+
+  </body>
+</html>
