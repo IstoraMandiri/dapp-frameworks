@@ -8,12 +8,19 @@
     <script src="web3.min.js"></script>
     <script>
 
-      web3.setProvider(new web3.providers.HttpProvider('http://geth.node:8545'));
+      // connect to the local node
+      web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
 
       $(document).ready(function(){
+
+        var contractABI;
+        var compiledSource;
+        var code;
+        var simpleStorageContract;
         var transactionHash;
         var simpleStorageContractInstance;
 
+        // define the contract source code
         var soliditySource = " \
         contract SimpleStorage { \
           uint public storedData; \
@@ -27,14 +34,9 @@
             return storedData; \
           } \
         }"
-        var contractABI;
-        var compiledSource;
-        var code;
-        var simpleStorageContract;
-        web3.eth.compile.solidity(soliditySource, function (err ,result) {
-          if(err){
-            alert(err);
-          };
+
+        web3.eth.compile.solidity(soliditySource, function (err, result) {
+          if(err){ alert(err) };
           compiledSource = result;
           contractABI = result.SimpleStorage.info.abiDefinition;
           code = compiledSource.SimpleStorage.code;
@@ -57,9 +59,13 @@
           $('.the-value').text(gottenValue);
         });
 
-        $('#create-contract').click(function () {
-          console.log('creating')
-          simpleStorageContractInstance = simpleStorageContract.new(1, {data: code, from: web3.eth.coinbase, gas: 300000}, function (err, contract) {
+        $('.deploy-contract').click(function () {
+          console.log('creating...')
+          simpleStorageContractInstance = simpleStorageContract.new(1337, {
+            data: code,
+            from: web3.eth.coinbase,
+            gas: 300000
+          }, function (err, contract) {
             if(!err) {
               if(!contract.address) {
                 console.log('tx pending...', contract.transactionHash);
@@ -94,7 +100,7 @@
     <p>
       <button class='get-value'>Get</button>
       <button class='set-value'>Set</button>
-      <button id='create-contract'>Create Contract</button>
+      <button class='deploy-contract'>Deploy Contract</button>
     </p>
 
     <hr>

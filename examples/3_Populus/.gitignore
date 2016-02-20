@@ -1,0 +1,7 @@
+chaindata/
+keystore/
+logs/
+dapp/
+.cache/
+__pycache__/
+nodekey

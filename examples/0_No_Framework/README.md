@@ -11,14 +11,15 @@ If you've followed the steps in `../README.md` you're good to go.
 Start geth on a testnet
 
 ```bash
- geth --networkid 1332 --minerthreads 1 --rpc --datadir "/tmp/no-framework-test" --genesis "/home/ubuntu/dev-genesis.json"
+cd examples/0\ No\ Framework
+geth --networkid 1332 --minerthreads 1 --datadir "/tmp/no-framework-test" --genesis test-genesis.json --rpc --rpccorsdomain '*'
 ```
 
 If you are running your node remote, add the following options:
 
 ```bash
 # NB: This is super insecure if you have disabled your firewall; use your actual IP
---rpccorsdomain '*' --rpcaddr "0.0.0.0"
+--rpcaddr "0.0.0.0"
 ```
 
 Attach a console in a new terminal window
