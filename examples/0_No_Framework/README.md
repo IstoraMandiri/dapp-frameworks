@@ -11,7 +11,7 @@ If you've followed the steps in `../README.md` you're good to go.
 Start geth on a testnet
 
 ```bash
-cd examples/0\ No\ Framework
+cd examples/0_No_Framework
 geth --networkid 1332 --minerthreads 1 --datadir "/tmp/no-framework-test" --genesis test-genesis.json --rpc --rpccorsdomain '*'
 ```
 

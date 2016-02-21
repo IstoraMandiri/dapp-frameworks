@@ -35,43 +35,41 @@
           } \
         }"
 
+        // compile the source code
         web3.eth.compile.solidity(soliditySource, function (err, result) {
           if(err){ alert(err) };
+          // get the compiled object
           compiledSource = result;
+          // contract ABI for creating JS methods
           contractABI = result.SimpleStorage.info.abiDefinition;
+          // the bytecode itself
           code = compiledSource.SimpleStorage.code;
+          // JS-formatted representation of contract
           simpleStorageContract = web3.eth.contract(contractABI);
         })
 
-        $('.set-value').click(function(){
-          var newValue = prompt("Enter a value")
-            if(simpleStorageContractInstance) {
-              simpleStorageContractInstance.set.sendTransaction(newValue, {from: web3.eth.coinbase});
-            }
-          console.log("Setting value...", newValue);
-        });
-
-        $('.get-value').click(function(){
-          var gottenValue = 'unknown';
-          if(simpleStorageContractInstance) {
-            gottenValue = simpleStorageContractInstance.get();
-          }
-          $('.the-value').text(gottenValue);
-        });
-
+        // when user clicks deploy buttton...
         $('.deploy-contract').click(function () {
           console.log('creating...')
+          // deploy the contract, set it's default value to 1337
           simpleStorageContractInstance = simpleStorageContract.new(1337, {
+            // pass the bytecode in
             data: code,
+            // use account with ether to transact
             from: web3.eth.coinbase,
+            // make sure we give it enough gas
             gas: 300000
           }, function (err, contract) {
             if(!err) {
+              // weird api thing: first callback returns TX address
               if(!contract.address) {
                 console.log('tx pending...', contract.transactionHash);
               } else {
+                // second callback returns contract address
                 console.log(contract.address);
                 $('#contractString').text(contract.address);
+                // trigger the get UI update
+                $('.set-value').click()
               }
             } else {
               alert(err);
@@ -79,6 +77,25 @@
           });
         });
 
+        // get the value -- no transaction required
+        $('.get-value').click(function(){
+          var gottenValue = 'unknown';
+          if(simpleStorageContractInstance) {
+            gottenValue = simpleStorageContractInstance.get();
+            $('.the-value').text(gottenValue);
+          }
+        });
+
+        // set the value -- send a transaction
+        $('.set-value').click(function(){
+          var newValue = prompt("Enter a value")
+            if(simpleStorageContractInstance) {
+              console.log("Setting value...", newValue);
+              simpleStorageContractInstance.set.sendTransaction(newValue, {from: web3.eth.coinbase});
+            }
+        });
+
+        // tick every 2 seconds and update UI
         setInterval(function(){
           $('#mining').text(web3.eth.mining);
           $('#coinbase').text(web3.eth.coinbase);
@@ -98,9 +115,9 @@
       The value is: <span class='the-value'>?</span>
     </p>
     <p>
-      <button class='get-value'>Get</button>
-      <button class='set-value'>Set</button>
-      <button class='deploy-contract'>Deploy Contract</button>
+      <button class='deploy-contract'>1. Deploy Contract</button>
+      <button class='set-value'>2. Set</button>
+      <button class='get-value'>3. Get</button>
     </p>
 
     <hr>
