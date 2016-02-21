@@ -24,6 +24,12 @@ First start a blockchain process
 embark blockchain
 ```
 
+Test contracts
+
+```bash
+embark spec
+```
+
 In a new terminal window, start up the server.
 
 ```bash

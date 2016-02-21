@@ -2,3 +2,4 @@ dist/
 generated/
 node_modules/
 chains.json
+config/chains/development.json

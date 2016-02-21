@@ -1,50 +1,18 @@
 ```
-What Why How
 
-Get dapple working
-
-Add instructions for test runner
-
-Collect info:
-  createdAt: Date
-  updatedAt: Date (last major release)
-  version: String (semver)
-  githubStars: Number
-  testingLanguage
-  frontendLanguage
-
-  No framework
-   Browser deploys -- prototyping
-   Limited complexity
-
-  Embark
-    Simulator
-    Built in Livereload
-    Auto miner
-    Serpent + Solidity
-
-  Truffle
-    Custom build pipeline, Pudding, Bluebird
-    https://github.com/ConsenSys/ether-pudding#interacting-with-your-contracts
-
-  Populus(?)
-  Doug
-  Dapple
+Add instructions for test runners
+Standardise readmes
+Add language to inro slides
+Record video of deploy
+Comparison table
 
   Blockapps
   Eris
-  Dapple
-   ~/.dapplerc
-   dappsys
-   On-chain test contracts
-  Bluemix
+  IBM
 
 The future
 
 Comparison table
-Comparison graph
-
-
-Uppdate no framework example to use localhost
+Comparison graph (what kind of developer are you)
 
 ```
