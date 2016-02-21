@@ -16,6 +16,14 @@ Clone to blockapps repo and install globally.
 npm install blockapps-bloc -g
 ```
 
+Warning: if you encounter issues later on with the NPM version, try the recent github version:
+
+```
+git clone -b nonative https://github.com/blockapps/bloc.git
+cd bloc
+npm install -g .
+```
+
 ## Try demo app
 
 This example is already built so can be started simply by using:
@@ -58,4 +66,9 @@ Now compile. `-s` adds scaffolding (but seems to be broken).
 bloc compile
 ```
 
+And start the server
+
+```
+bloc start
+```
 
