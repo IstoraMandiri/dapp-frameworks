@@ -1,0 +1,25 @@
+extends ./layout.jade
+	
+	
+// --------------- Header -------------- //
+block custom_header
+	script(type='text/javascript').
+		$(document).ready(function(){
+			
+		});
+		
+		
+// --------------- Navigation Bar  -------------- //
+block navpanel
+	#logo Marbles P?
+	
+	
+// --------------- Main Stuff  -------------- //
+block content
+	#contentPanel
+		
+		h1 Error: #{bag.error.status}
+		center
+			h2 #{bag.error.msg}
+			
+		hr
