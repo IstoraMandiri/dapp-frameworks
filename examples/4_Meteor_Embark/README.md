@@ -20,3 +20,7 @@ EMBARK_DEBUG=1 meteor
 ```
 
 Once it's ready, visit http://localhost:3000
+
+## Deployment
+
+Check out [meteor-build-client](https://github.com/frozeman/meteor-build-client) for standalone deployment options.
