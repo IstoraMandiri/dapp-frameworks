@@ -17,6 +17,8 @@ Start your permissioned chain.
 # make sure docker is set up
 docker-machine ls
 docker-machine start eris
+# you might need to
+# docker-machine regenerate-certs eris
 # become one with the machine
 eval "$(docker-machine env eris)"
 eris chains ls

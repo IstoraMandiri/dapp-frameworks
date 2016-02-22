@@ -10,7 +10,6 @@ Test
 py.test tests
 ```
 
-
 Deploy
 ```
 populus deploy
@@ -23,7 +22,5 @@ populus chain run
 
 Run webserver
 ```
-cd example/3_Populus
-populus web init
 populus web runserver
 ```

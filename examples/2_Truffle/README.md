@@ -9,16 +9,21 @@
 
 ## Usage
 
-Spin up a testnet with `embark` on port `8545`, then start watching with `truffle`
+Spin up a testnet with `embark` on port `8545`
 
 ```bash
 truffle deploy
 truffle build
-truffle watch
 ```
 
 Run the tests
 
 ```
 truffle test
+```
+
+Start a web server
+
+```
+truffle serve
 ```

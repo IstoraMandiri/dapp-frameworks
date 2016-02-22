@@ -39,3 +39,27 @@ embark run
 If you use LiveReload, turn it on!
 
 Then visit http://localhost:3000
+
+---
+
+Bonus Tip: Easy Test Blockchain
+
+Create an empty embark installation
+
+```
+cd ~/
+embark new embark-blockchain
+mv embark-blockchain .embark-blockchain
+cd .embark-blockchain
+# Remove all .sol files, update contracts.yml
+```
+
+Then create an alias
+
+```
+geth-test(){
+  nvm use 0.12;
+  cd ~/.embark-blockchain;
+  embark blockchain;
+}
+```
