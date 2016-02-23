@@ -1,5 +1,7 @@
 # Dapp Frameworks Playground
 
+Watch the talk on youtube: https://www.youtube.com/watch?v=XdPkzzjmirw
+
 ### A collection of usage examples of Dapp Development Frameworks
 
 This repository complements the 'Dapp Frameworks' talk by Chris Hitchcott on 22nd Feb 2016.
